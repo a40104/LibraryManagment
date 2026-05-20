@@ -84,10 +84,12 @@ public class LibraryManager {
 
     /**
      * 도서를 시스템에서 삭제합니다.
+     * @see <a href="https://github.com/a40104/LibraryManagment/issues/1">Issue #1: 한 책 삭제 시 DB에서 해당 책이 삭제 안됨 #1</a>
      * @param id 삭제할 도서 ID
      * @return 삭제 성공 여부
      */
     public boolean deleteBook(int id) {
+        repository.deleteBook(id);
         return bookMap.remove(id) != null;
     }
 
