@@ -5,7 +5,7 @@ import java.util.*;
  * <p>사용자 인터페이스(CLI)를 제공하며, DB 연결하여 권한에 따른 메뉴 출력 및 사용자 입력을 처리합니다.</p>
  * <p>2026년 5월 18일 시작</p>
  *
- * @author 홍세기
+ * @author 남수만
  * @version 1.2
  */
 public class LibraryMain {
@@ -50,7 +50,13 @@ public class LibraryMain {
         while (true) {
             System.out.println("\n========= CSV 로그인 시스템 =========");
             System.out.print("아이디: ");
-            String id = sc.nextLine();
+            String id = sc.nextLine().trim();
+            //이슈 3번 수정
+            if (!id.isEmpty() && Character.isDigit(id.charAt(0))) {
+                System.out.println("다시 입력하세요");
+                continue;
+            }
+
             System.out.print("비밀번호: ");
             String pw = sc.nextLine();
 
@@ -58,6 +64,7 @@ public class LibraryMain {
             System.out.println("[오류] 아이디 또는 비밀번호가 틀렸습니다.");
         }
     }
+
 
     /**
      * 입력된 선택 번호와 사용자 권한에 따라 적절한 UI 기능을 호출합니다.
@@ -152,8 +159,9 @@ public class LibraryMain {
     /**
      * 도서 정보의 수정 및 삭제를 처리하는 UI입니다.
      * <p>ID를 통해 도서를 조회하고, 선택에 따라 제목/저자 수정 또는 삭제를 수행합니다.</p>
-     * <p>수정과 삭제의 효율화를 위해 기능으로 개발(26.05.20; 홍세기</p>
-     * @see <a href="https://github.com/a40104/LibraryManagment/issues/1">Issue #1: 한 책 삭제 시 DB에서 해당 책이 삭제 안됨 #1</a>
+     * <p>수정과 삭제의 효율화를 위해 같은 기능으로 개발(26.05.20; 남수만)</p>
+     * @see <a href="https://github.com/sumannam/LibraryManagement/issues/1">Issue #1: 한 책 삭제 시 DB에서 해당 책이 삭제 안됨</a>
+     *
      * @see LibraryManager#deleteBook(int)
      */
     private static void editOrDeleteUI() {
@@ -195,7 +203,6 @@ public class LibraryMain {
                 // DB 저장
                 manager.saveChanges();
             }
-
             case 2 -> {
                 System.out.print("- 새 저자 입력: ");
                 String newAuthor = sc.nextLine().trim();
@@ -209,10 +216,8 @@ public class LibraryMain {
             }
             case 3 -> {
                 manager.deleteBook(id);
-                //삭제 쿼리를 작성
+                // 삭제 쿼리를 작성
                 System.out.println("[결과] 삭제되었습니다.");
-
-
             }
         }
     }
