@@ -3,9 +3,9 @@ import java.util.*;
 /**
  * 도서 관리 시스템의 메인 클래스
  * <p>사용자 인터페이스(CLI)를 제공하며, DB 연결하여 권한에 따른 메뉴 출력 및 사용자 입력을 처리합니다.</p>
- * <p>2026년 5월 18일 시작</p>
+ * <p>2026년 6월 4일 시작</p>
  *
- * @author 남수만
+ * @author 홍세기 pc new version
  * @version 1.2
  */
 public class LibraryMain {
@@ -17,7 +17,7 @@ public class LibraryMain {
         manager = new LibraryManager(repo);
         manager.initialize();
 
-        if (!performLogin())
+        if (!performLaogin())
             return;
 
         User user = manager.getCurrentUser();
