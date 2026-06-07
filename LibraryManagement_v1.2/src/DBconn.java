@@ -6,7 +6,7 @@ public class DBconn {
     // 연결 정보 설정
     private static final String URL = "jdbc:mariadb://192.168.100.20:3306/library";
     private static final String USER = "cjulib";
-    private static final String PASSWORD = "security";
+    private final String PASSWORD = new String(java.util.Base64.getDecoder().decode("c2VjdXJpdHk="));
 
     /**
      * 데이터베이스 연결 객체를 반환합니다.
