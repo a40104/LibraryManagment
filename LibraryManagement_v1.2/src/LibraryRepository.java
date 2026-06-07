@@ -6,7 +6,7 @@ public class LibraryRepository {
     // DB 연결 정보
     private final String URL = "jdbc:mariadb://192.168.100.20:3306/library";
     private final String USER = "cjulib";
-    private final String PASSWORD = "security";
+    private final String PASSWORD = new String(java.util.Base64.getDecoder().decode("c2VjdXJpdHk="));
 
     /**
      * MariaDB 연결을 위한 전용 메소드입니다.
